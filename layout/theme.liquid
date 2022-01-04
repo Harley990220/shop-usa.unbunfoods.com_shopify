@@ -37,19 +37,7 @@
   {% include 'social-meta-tags' %}
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
-  <link rel="stylesheet" href="{{ 'slider-banner.scss' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'slider-text.scss' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'slider-social.scss' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'slider-stockist.scss' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'image-text.scss' | asset_url }}">
-  
-  <!-- Добавляем стили из CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
   <script>
     var theme = {
       strings: {
@@ -83,31 +71,61 @@
   <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
   <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'slider-banner.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'slider-text.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'slider-stockist.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'slider-social.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'product.js' | asset_url }}" defer="defer"></script>
+
   {{ content_for_header }}
-{%- render 'bold-pr' -%}
-{%- render 'bold-common' -%}
+  
+  {% assign is_wcp_wholesale_customer = false %}
+  {% assign active_discounts = shop.metafields.wcp_active_discounts.wcp_active_discounts %}
+  {% assign active_discounts_array = active_discounts | split: ',' %}
+  {% if shop.metafields.wcp_status.wcp_status != 'disabled' and customer %}
+  {% for discount_key in active_discounts_array %}
+  {% assign key_split = discount_key | split: '-' %}
+  {% assign key_split_length = key_split | size %}
+  {% if key_split_length > 2 %}      		
+  {% assign removeable_key = key_split.last | prepend: '-' %}
+  {% assign wcp_hide_sale_badge_customer_tag = discount_key | remove_first: removeable_key %}
+  {% else %}
+  {% assign wcp_hide_sale_badge_customer_tag = key_split[0] %}
+  {% endif %}
+  {% if customer.tags contains wcp_hide_sale_badge_customer_tag %}
+  {% assign is_wcp_wholesale_customer = true %}
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  {% if is_wcp_wholesale_customer == false %}
+
+  {%- render 'bold-pr' -%}
+  {%- render 'bold-common' -%}
+
+  {% endif %}	
+
 
   <!-- OrderLogic checkout restrictions ========================================= -->
   {% include 'order-logic' %}
  
-  <!-- BEGIN INCLUDE CUSTOM CSS   -->
-  <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
-  <link rel="stylesheet" href="{{ 'responsive.css' | asset_url }}">
-  <!-- END INCLUDE CUSTOM CSS   -->
+ {{ shop.metafields.fontify.stylesheets }}
+ 
+<!-- YOTPO JAVASCRIPT | layout > theme.liquid  -->
+<script type="text/javascript">
+	(function e(){ 
+		var e=document.createElement("script");
+		e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/cRNwWowiZwzhHfMmbL8e6SU65NzD2wdaUlNEx7Pf/widget.js";
+		var t=document.getElementsByTagName("script")[0];
+		t.parentNode.insertBefore(e,t)
+	})();
+</script>
+<!-- END | YOTPO JAVASCRIPT -->
   
 {% include 'pagefly-header' %}
- <script async src="https://assets.apphero.co/script_tags/238162_569198.js"></script>
+ 
 	{{ shop.metafields.loox["global_html_head"] }}
-
-<script type="text/javascript">
-(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/cRNwWowiZwzhHfMmbL8e6SU65NzD2wdaUlNEx7Pf/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-</script>
-
+  <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
+  {% if content_for_header contains 'pickystory' %}
+    {% render 'pickystory-combos-prefetch' %}
+  {% endif %}
+  <!-- PickyStory code end -->
+{% include 'sca.freegifts' %}
+<script async src="https://assets.apphero.co/script_tags/238162_321032.js"></script>{% render 'minmaxify-head' %}
 </head> 
 
 <body class="template-{{ template | split: '.' | first }}">
@@ -168,6 +186,48 @@
   
 
 	{{ shop.metafields.loox["global_html_body"] }}
+  <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
+  {% if content_for_header contains 'pickystory' %}
+    {% render 'pickystory-combos-prerender' %}
+  {% endif %}
+  <!-- PickyStory code end -->
+  <!-- PickyStory snippet "main_widget_script", do not modify. Safe to remove after the app is uninstalled -->
+  {% if content_for_header contains 'pickystory' %}
+    <script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
+  {% endif %}
+  <!-- PickyStory end snippet "main_widget_script" -->
+<!-- WPD Start -->
+                {% if customer.tags.size > 0 and template != 'cart' %}
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                      let checkoutbtninterval = setInterval(function(){
+                        var x=document.querySelectorAll("input[name='checkout'], button[name='checkout'], input[name='goto_pp'], button[name='goto_pp'], input[name='goto_gc'], button[name='goto_gc'], [href$='checkout']");
+                        var WPD_RedirectToCart = function(e) {
+                          	e.stopPropagation();
+                            e.preventDefault();
+                            window.location = '/cart';
+                            };
+                            for (var i = 0; i < x.length; i++) {
+                                x[i].addEventListener('click', WPD_RedirectToCart, false);
+                            }
+},500)
+                });
+              </script>
+               {% endif %}
+         
+
+               {% if customer.tags.size > 0 and template == 'cart' %}
+                 {% include 'wcp_cart' %}
+               {% endif %}
+               <!-- WPD End -->
   
-</body>
+  {% if is_wcp_wholesale_customer == true %}
+  <style>
+    .dynamic-checkout__content{
+      display:none !important;
+    }
+  </style>
+  {% endif %}	
+
+  </body>
 </html>

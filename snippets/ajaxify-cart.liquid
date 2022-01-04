@@ -1,5 +1,27 @@
 <script>
-  window.onload = function() {
+
+if((typeof Shopify) === 'undefined'){ window.Shopify = {}; }
+if((typeof Shopify.getCart) === 'undefined'){
+  Shopify.getCart = function(callback, cart){
+    if(!cart){
+      return jQuery.getJSON('/cart.js', function(cart, textStatus, xhr){
+        if((typeof callback) === 'function'){
+          callback(cart, textStatus, xhr);
+        } else {
+          Shopify.onCartUpdate(cart);
+        }
+      });
+    } else {
+      if((typeof callback) === 'function'){
+        callback(cart);
+      } else if(typeof Shopify.onCartUpdate === 'function'){
+        Shopify.onCartUpdate(cart);
+      }
+    }
+  };
+}
+
+window.onload = function() {
 
 /**
  * Module to ajaxify all add to cart forms on the page.
@@ -95,7 +117,10 @@ Shopify.AjaxifyCart = (function($) {
               _setText($addToCartBtn,_config.addToCartBtnLabel);
             }, _config.howLongTillBtnReturnsToNormal);
             // Update cart count and show cart link.
-            $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
+
+            //$.getJSON(_config.shopifyAjaxCartURL, function(cart) {
+            Shopify.getCart(function(cart){
+              
               if (_config.cartCountSelector && $(_config.cartCountSelector).length) {
                 var value = $(_config.cartCountSelector).html() || '0';
                 $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');

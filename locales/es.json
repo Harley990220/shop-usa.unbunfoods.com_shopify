@@ -1,5 +1,6 @@
 {
-  "general": {
+  "general":
+  {
     "404": {
       "title": "404 Página no encontrada",
       "subtext": "La página que ha solicitado no existe.",

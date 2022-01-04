@@ -6,7 +6,6 @@
   {% capture img_id %}ProductCardImage-{{ section.id }}-{{ product.id }}{% endcapture %}
   {% capture wrapper_id %}ProductCardImageWrapper-{{ section.id }}-{{ product.id }}{% endcapture %}
   {%- assign img_url = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-  {%- assign img_url_hover = product.images[1] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
   {% unless product.featured_image == blank %}
     {% include 'image-style' with image: product.featured_image, width: max_height, height: max_height, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
@@ -14,7 +13,7 @@
 
   <div class="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
     <div id="{{ wrapper_id }}" class="grid-view-item__image-wrapper product-card__image-wrapper js">
-      <div class="product-card__image-primary" style="padding-top:{% unless product.featured_image == blank %}{{ 1 | divided_by: product.featured_image.aspect_ratio | times: 100 }}%{% else %}100%{% endunless %};">
+      <div style="padding-top:{% unless product.featured_image == blank %}{{ 1 | divided_by: product.featured_image.aspect_ratio | times: 100 }}%{% else %}100%{% endunless %};">
         <img id="{{ img_id }}"
               class="grid-view-item__image lazyload"
               alt="{{ product.featured_image.alt }}"
@@ -23,16 +22,9 @@
               data-aspectratio="{{ product.featured_image.aspect_ratio }}"
               data-sizes="auto"
               data-image>
-      </div>
-      <div class="product-card__image-hover" style="padding-top:{% unless product.images[1] == blank %}{{ 1 | divided_by: product.images[1].aspect_ratio | times: 100 }}%{% else %}100%{% endunless %};">
-        <img id="{{ img_id }}"
-              class="grid-view-item__image lazyload"
-              alt="{{ product.images[1].alt }}"
-              data-src="{{ img_url_hover }}"
-              data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-              data-aspectratio="{{ product.images[1].aspect_ratio }}"
-              data-sizes="auto"
-              data-image>
+
+        <span><img style="display:none;" id="secomapp-fg-image-{{ product.id }}" src="{{ "icon-freegift.png" | asset_url }}" alt="Free Gift Icon" class="sca-fg-img-collect"></span>
+        <span class="sca-fg-cat-list prod-show-list" style="display:none;" id="secomapp-fg-data-{{ product.id }}"></span>
       </div>
     </div>
     <div class="placeholder-background placeholder-background--animation" data-image-placeholder></div>
@@ -44,35 +36,20 @@
   </noscript>
 
   <div class="h4 grid-view-item__title product-card__title" aria-hidden="true">{{ product.title }}</div>
-<div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
+  <div class="loox-rating" data-id="{{ product.id }}" data-rating="{{ product.metafields.loox.avg_rating }}" data-raters="{{ product.metafields.loox.num_reviews }}"></div>
 
   {% include 'product-price', variant: product %}
-  <div style="padding-top: 25px;text-align: center;">
-    <a href="{{ block.settings.button_link }}" class="new_btn">
-        <svg width="13" height="18" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12.8452 9.21761L7.25768 2.34174L8.7306 0.529202L16.8327 10.4995L8.7306 20.4697L7.25768 18.6572L12.8452 11.7813L0.166015 11.7813L0.166015 9.21761L12.8452 9.21761Z" fill="#F7F3E8"/>
-        </svg>
-        {% if block.settings.button_label != blank %}
-        {{ block.settings.button_label | escape }} 
-        {% else if %}
-        add to cart
-        {% endif %}
-        <svg width="13" height="18" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4.272 11.6642L9.8595 18.5401L8.38659 20.3526L0.284503 10.3824L8.38659 0.412109L9.8595 2.22465L4.272 9.10052L16.9512 9.10052L16.9512 11.6642L4.272 11.6642Z" fill="#F7F3E8"/>
-        </svg> 
-    </a>
-</div>
-<div style="padding-top: 25px;text-align: center;">
-  <a href="{{ product.url }}" class="new_btn">
-      <svg width="13" height="18" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.8452 9.21761L7.25768 2.34174L8.7306 0.529202L16.8327 10.4995L8.7306 20.4697L7.25768 18.6572L12.8452 11.7813L0.166015 11.7813L0.166015 9.21761L12.8452 9.21761Z" fill="#F7F3E8"/>
-      </svg>      
-      Find in store
-      <svg width="13" height="18" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4.272 11.6642L9.8595 18.5401L8.38659 20.3526L0.284503 10.3824L8.38659 0.412109L9.8595 2.22465L4.272 9.10052L16.9512 9.10052L16.9512 11.6642L4.272 11.6642Z" fill="#F7F3E8"/>
-      </svg> 
-  </a>
-</div>
+  
+  {%comment%}
  <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+{%endcomment%}
+  
+<!-- YOTPO EMPTY STAR RATING | location: snippets > product-card-grid.liquid -->
+<div class="yotpo bottomLine" data-product-id="{{ product.id }}"></div>
 
+<style>
+	.yotpo.bottomLine .text-m { padding-left: 4px; }
+</style>
+<!-- END | YOTPO STAR RATING -->
+  
 {% render 'preorder-now-collection-item', product: product %}</div>

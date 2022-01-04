@@ -5,6 +5,7 @@
         {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
         {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
         {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style' with image: section.settings.image, width: 545, height: 545, small_style: true, wrapper_id: wrapper_id, img_id: img_id %}
         <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
           <div style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;">
             <img id="{{ img_id }}"
@@ -19,7 +20,7 @@
         </div>
 
         <noscript>
-          {{ section.settings.image | img_url: '800x800', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
+          {{ section.settings.image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
         </noscript>
       {% else %}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -40,18 +41,9 @@
         <div class="rte rte-setting featured-row__subtext">{{ section.settings.text }}</div>
       {% endif %}
       {% if section.settings.button_label != blank and section.settings.button_link != blank %}
-        <div style="padding-top: 25px;">
-          <a href="{{ section.settings.button_link }}" class="new_btn">
-            <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12.8452 9.21761L7.25768 2.34174L8.7306 0.529202L16.8327 10.4995L8.7306 20.4697L7.25768 18.6572L12.8452 11.7813L0.166015 11.7813L0.166015 9.21761L12.8452 9.21761Z" fill="#F7F3E8"/>
-            </svg>
-            {{ section.settings.button_label | escape }}
-            <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.272 11.6642L9.8595 18.5401L8.38659 20.3526L0.284503 10.3824L8.38659 0.412109L9.8595 2.22465L4.272 9.10052L16.9512 9.10052L16.9512 11.6642L4.272 11.6642Z" fill="#F7F3E8"/>
-            </svg> 
-          </a>
-        </div>
-        
+        <a href="{{ section.settings.button_link }}" class="btn">
+          {{ section.settings.button_label | escape }}
+        </a>
       {% endif %}
     </div>
 

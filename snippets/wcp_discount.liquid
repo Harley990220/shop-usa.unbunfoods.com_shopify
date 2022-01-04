@@ -125,12 +125,12 @@
     {% if show_js %}
         <script>
             {% if wcp_metafields %}
-            {% assign wcp_meta_arr = wcp_metafields | split: ',' %}
-            {% for meta in wcp_meta_arr %}
-            {% assign key_val = meta |split: '-' %}
-            {% if key_val[1] %}
-            window.wcp_metafields[{{ key_val[0] }}] = {{ key_val[1] }};{% endif %}
-            {% endfor %}
+                {% assign wcp_meta_arr = wcp_metafields | split: ',' %}
+                {% for meta in wcp_meta_arr %}
+                    {% assign key_val = meta |split: '-' %}
+                    {% if key_val[1] %}
+                        window.wcp_metafields[{{ key_val[0] }}] = {{ key_val[1] }};{% endif %}
+                {% endfor %}
             {% endif %}
             window.wcp_discount_value = {{ wcp_discount_value }};
             window.wcp_customer_tag = "{{ wcp_customer_tag }}";

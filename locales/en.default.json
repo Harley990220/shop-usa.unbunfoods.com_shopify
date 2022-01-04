@@ -65,7 +65,7 @@
     },
     "newsletter_form": {
       "newsletter_email": "Subscribe to our mailing list",
-      "email_placeholder": "Your E-mail address",
+      "email_placeholder": "Email address",
       "confirmation": "Thanks for subscribing!",
       "submit": "Subscribe"
     },
@@ -407,13 +407,15 @@
   },
   "shopify": {
     "checkout": {
-      "order_summary": {
-        "discount_placeholder": "New? Free Shipping Code: NEWUNBUN",
-        "shipping_label": "Shipping \n*NEW CUSTOMERS* Free Shipping Discount Code: NEWUNBUN"
-      },
       "shipping": {
-        "shipping_method_notice": "Please note, FedEx does not deliver to P.O. boxes. Only proceed with your order if shipping to a residential address."
+        "shipping_method_notice": "Please note, FedEx does not deliver to P.O. boxes. Only proceed with your order if shipping to a physical address."
+      },
+      "contact": {
+        "shipping_address_title": "Shipping address"
       }
+    },
+    "links": {
+      "powered_by_shopify": " "
     }
   }
 }

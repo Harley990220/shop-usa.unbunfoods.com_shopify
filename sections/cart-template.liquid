@@ -1,4 +1,17 @@
 <div class="page-width" data-section-id="{{ section.id }}" data-section-type="cart-template">
+
+    <div id="sca-fg-owl-carousel">
+        <div id="freegift_cart_container" class="sca-fg-cart-container" style="display: none;">
+            <div id="freegift_message" class="owl-carousel"></div>
+        </div>
+        <div id="sca-fg-slider-cart" style="display: none;">
+            <div class="sca-fg-cart-title">
+                <strong>Select your free gift (s)</strong>
+            </div>
+            <div id="sca_freegift_list" class="owl-carousel"></div>
+        </div>
+    </div>
+
     {% if cart.item_count > 0 %}
         <div class="cart-header">
             <h1 class="cart-header__title">{{ 'cart.general.title' | t }}</h1>
@@ -17,16 +30,28 @@
                 </thead>
                 <tbody>
                 {% for item in cart.items %}
+                    {% include 'wcp_discount' with item.product %}
+                    {%- include 'wcp_variant' with item.variant -%}
+                    {% include 'wcp_vd_discount' with item %}
+                    {% assign wcp_custom_final_Price = item.final_price %}
+                    {% if wcp_v_price < wcp_custom_final_Price %}
+                        {% assign wcp_line_price = wcp_v_price | floor | minus: 0 | times: item.quantity %}
+                    {% else %}
+                        {% assign wcp_line_price = wcp_custom_final_Price | floor | minus: 0 | times: item.quantity %}
+                    {% endif %}
+
                     <tr class="cart__row border-bottom line{{ forloop.index }}{% if forloop.first %} border-top{% endif %}">
                         <td class="cart__image-wrapper">
                             <div>
                                 <img class="cart__image" src="{{ item | img_url: '95x95', scale: 2 }}"
-                                     alt="{{ item.title | escape }}" data-item-url="{{ item.url }}">
+                                     alt="{{ item.title | remove: '/ Default Title' | remove: 'Default Title' | remove: '/ Default' | remove: 'Default' | replace: '(Freegifts)', '' | escape }}"
+                                     data-item-url="{% if item.variant.metafields.secomapp.freegifts %}{{ item.product.url }}{% else %}{{ item.url }}{% endif %}">
                             </div>
                         </td>
                         <td class="cart__meta small--text-left">
                             <div class="list-view-item__title">
-                                <a href="{{ item.url }}" class="cart__product-title">
+                                <a href="{% if item.variant.metafields.secomapp.freegifts %}{{ item.product.url }}{% else %}{{ item.url }}{% endif %}"
+                                   class="cart__product-title">
                                     {{ item.product.title }}
                                     {% if item.quantity > 1 %}
                                         <span class="medium-up--hide"><span
@@ -73,6 +98,8 @@
                                 </div>
                             {% endif %}
 
+                            {{ NextDiscountHtml }}
+
                             <p class="cart__remove small--hide">
                                 <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
                                    class="text-link text-link--accent"
@@ -80,7 +107,7 @@
                             </p>
                         </td>
                         <td class="cart__price-wrapper text-right">
-                            {%- if item.original_price != item.final_price -%}
+                            {%- if wcp_v_compare_at_price != wcp_v_price -%}
                                 <dl>
                                     <dt>
                                         <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
@@ -92,7 +119,7 @@
                                                         data-item-key="{{ item.key }}"
                                                         style="display:none !important;"></span>
                                                 <div class="pn-price-item"
-                                                     data-id="{{ item.key }}">{{ item.original_price | money }}</div>
+                                                     data-id="{{ item.key }}">{{ wcp_v_compare_at_price | money }}</div>
                                             </div>
                                         </s>
                                     </dd>
@@ -103,7 +130,7 @@
                                         <span class="order-discount"><span
                                                     class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_price_3"
                                                     data-item-key="{{ item.key }}"
-                                                    style="display:none !important;"></span>{{ item.final_price | money }}</span>
+                                                    style="display:none !important;"></span>{{ wcp_v_price | money }}</span>
                                     </dd>
                                 </dl>
                             {%- else -%}
@@ -111,7 +138,7 @@
                                             class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_price_2"
                                             data-item-key="{{ item.key }}" style="display:none !important;"></span>
                                     <div class="pn-price-item"
-                                         data-id="{{ item.key }}">{{ item.original_price | money }}</div>
+                                         data-id="{{ item.key }}">{{ wcp_v_compare_at_price | money }}</div>
                                 </div>
                             {%- endif -%}
 
@@ -142,13 +169,14 @@
                             <div class="cart__qty">
                                 <label for="updates_large_{{ item.key }}"
                                        class="cart__qty-label">{{ 'cart.label.quantity' | t }}</label>
-                                <input class="cart__qty-input" type="number" name="updates[]"
+                                <input {% if item.variant.metafields.secomapp.freegifts %}readonly{% endif %}
+                                       class="cart__qty-input" type="number" name="updates[]"
                                        id="updates_large_{{ item.key }}" value="{{ item.quantity }}" min="0"
                                        pattern="[0-9]*" data-quantity-item="{{ forloop.index }}">
                             </div>
                         </td>
                         <td class="text-right small--hide">
-                            {%- if item.original_line_price != item.final_line_price -%}
+                            {%- if item.original_line_price != wcp_line_price -%}
                                 <dl>
                                     <dt>
                                         <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
@@ -171,7 +199,7 @@
                                         <span class="order-discount"><span
                                                     class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_total_3"
                                                     data-item-key="{{ item.key }}"
-                                                    style="display:none !important;"></span>{{ item.final_line_price | money }}</span>
+                                                    style="display:none !important;"></span>{{ wcp_line_price | money }}</span>
                                     </dd>
                                 </dl>
                             {%- else -%}
@@ -242,12 +270,51 @@
                                 </div>
                             {%- endif -%}
 
-                            <div class="cart-subtotal">
-                                <span class="cart-subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
-                                <span class="cart-subtotal__price"><span
-                                            class="Bold-theme-hook-DO-NOT-DELETE bold_cart_total"
-                                            style="display:none !important;"></span>{{ cart.total_price | money }}</span>
-                            </div>
+                            {% assign is_wcp_wholesale_customer = false %}
+                            {% assign active_discounts = shop.metafields.wcp_active_discounts.wcp_active_discounts %}
+                            {% assign active_discounts_array = active_discounts | split: ',' %}
+                            {% if shop.metafields.wcp_status.wcp_status != 'disabled' and customer %}
+                                {% for discount_key in active_discounts_array %}
+                                    {% assign key_split = discount_key | split: '-' %}
+                                    {% assign key_split_length = key_split | size %}
+                                    {% if key_split_length > 2 %}
+                                        {% assign removeable_key = key_split.last | prepend: '-' %}
+                                        {% assign wcp_hide_sale_badge_customer_tag = discount_key | remove_first: removeable_key %}
+                                    {% else %}
+                                        {% assign wcp_hide_sale_badge_customer_tag = key_split[0] %}
+                                    {% endif %}
+                                    {% if customer.tags contains wcp_hide_sale_badge_customer_tag %}
+                                        {% assign is_wcp_wholesale_customer = true %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            {% if is_wcp_wholesale_customer == true %}
+
+                                <div class="cart-subtotal">
+                                    <span class="cart-subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
+                                    <span><span class="wcp-original-cart-total">{{ cart.total_price | money }}</span>
+                <span class="wcp-cart-total"></span>  </span></div>
+                                <div class="additional-notes">
+                                    <span class="wcp-minimums-note"></span>
+                                    <span class="wcp-extra-note "></span>
+                                </div>{% render "wcp_multi_currency_msg" %}
+
+                            {% else %}
+                                <div class="cart-subtotal">
+                                    <span class="cart-subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
+                                    <span class="cart-subtotal__price"><span
+                                                class="Bold-theme-hook-DO-NOT-DELETE bold_cart_total"
+                                                style="display:none !important;"></span><span
+                                                class="wcp-original-cart-total">{{ cart.total_price | money }}</span>
+                <span class="wcp-cart-total"></span>  </span></div>
+                                <div class="additional-notes">
+                                    <span class="wcp-minimums-note"></span>
+                                    <span class="wcp-extra-note "></span>
+                                </div>{% render "wcp_multi_currency_msg" %}
+                            {% endif %}
+
+
+
 
                             {% comment %} DO NOT DELETE UNTIL APP UNINSTALL! Discount On Cart Pro - START {% endcomment %}
                         </div>
@@ -274,7 +341,17 @@
                                    value="{{ 'cart.general.checkout' | t }}">
                         </div>
 
-                        {% if additional_checkout_buttons %}
+
+                        <div>{% if customer.tags contains "wpdnet" %}
+                                {% if shop.metafields.wcp_net.isNetEnabled == "true" or shop.metafields.wcp_net.isNetEnabled == "1" %}
+                                    <div style="margin-top:30px;float: right;">
+                                        <p>{{ shop.metafields.wcp_net.netCartMsg }}</p>
+                                        <a id="wcp-30-open" class="btn">{{ shop.metafields.wcp_net.netBtnMsg }}</a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}</div>
+                        {%- if additional_checkout_buttons -%}
+
                             <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
                         {% endif %}
                     </div>
@@ -293,6 +370,25 @@
         </div>
     {% endif %}
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var WPD_reloadPage = function (e) {
+            setTimeout(function () {
+                window.location.reload();
+            }, 2500);
+        };
+
+        function wcp_build_event(x) {
+            for (var i = 0; i < x.length; i++) {
+                x[i].addEventListener('click', WPD_reloadPage, false);
+            }
+        }
+
+        var x = document.querySelectorAll(".cart__remove");
+        wcp_build_event(x);
+    }, false);
+</script>
 
 
 {% schema %}

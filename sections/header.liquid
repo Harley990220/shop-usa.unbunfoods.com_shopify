@@ -1,4 +1,4 @@
-
+{% if section.settings.message %}
   <style>
     {% if section.settings.logo != blank %}
       .site-header__logo-image {
@@ -12,6 +12,7 @@
       }
     {% endif %}
   </style>
+{% endif %}
 
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
   {% if section.settings.message %}
@@ -54,9 +55,9 @@
 
     {% endif %}
   {% endif %}
-  <script>console.log("{{template | json}}")</script>
-  <header class="site-header{% if section.settings.align_logo == 'left' %} logo--left{% else %} logo--center{% endif %}" role="banner">
-    <div class="grid grid--no-gutters grid--table site-header__mobile-nav page-width">
+
+  <header class="site-header{% if section.settings.align_logo == 'left' %} border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
+    <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
       {% if section.settings.align_logo == 'center' %}
         {%- assign logo_classes = 'medium-up--one-third medium-up--push-one-third logo-align--center' -%}
       {% else %}
@@ -73,15 +74,8 @@
         {% else %}
           <div class="h2 site-header__logo">
         {% endif %}
-          <script>console.log('{{page.title}}')</script>
-          {% if section.settings.blue_logo or  section.settings.white_logo %}
-            {% if page.title == 'Shop' or template contains 'product' or page.title == 'blog' or template.name contains 'article' %}
-              {%- assign img_url = section.settings.blue_logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-
-              {% else %}
-              {%- assign img_url = section.settings.white_logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-
-            {% endif %}
+          {% if section.settings.logo %}
+            {%- assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
             <a href="https://unbunfoods.com" class="site-header__logo-image{% if section.settings.align_logo == 'center' %} site-header__logo-image--centered{% endif %}">
               {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
               <img class="lazyload js"
@@ -116,10 +110,9 @@
         </nav>
       {% endif %}
 
-<!--    BEGIN ADD CART MENU    -->
-<div class="nav-icons-group grid__item {% if section.settings.align_logo == 'left' %}medium-up--one-quarter{% else %}medium-up--one-third medium-up--push-one-third{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
+      <div class="grid__item {% if section.settings.align_logo == 'left' %}medium-up--one-quarter{% else %}medium-up--one-third medium-up--push-one-third{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
         <div class="site-header__icons-wrapper">
-          <!--    <div class="site-header__search site-header__icon">
+          <div class="site-header__search site-header__icon">
             {% include 'search-form' %}
           </div>
 
@@ -165,18 +158,17 @@
                 {% include 'icon-chevron-down' %}
               </div>
             {% endform %}
-          {% endif %} -->
+          {% endif %}
 
           {% unless linklists[section.settings.main_linklist] == blank %}
-            <button type="button" id="mobile_button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
+            <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}">
               {% include 'icon-hamburger' %}
               {% include 'icon-close' %}
             </button>
           {% endunless %}
-        </div>        
-      </div>
-	<!-- END ADD CART MEANU -->
+        </div>
 
+      </div>
     </div>
 
     <nav class="mobile-nav-wrapper medium-up--hide" role="navigation">
@@ -405,26 +397,10 @@
     },
     {
       "type": "image_picker",
-      "id": "blue_logo",
+      "id": "logo",
       "label": {
         "de": "Logo-Foto",
-        "en": "Blue Logo image",
-        "es": "Logotipo",
-        "fr": "Image du logo",
-        "it": "Immagine del logo",
-        "ja": "ロゴ画像",
-        "nl": "Afbeelding van logo",
-        "pt-BR": "Imagem do logotipo",
-        "zh-CN": "logo 图片",
-        "zh-TW": "標誌圖片"
-      }
-    },
-    {
-      "type": "image_picker",
-      "id": "white_logo",
-      "label": {
-        "de": "Logo-Foto",
-        "en": "White Logo image",
+        "en": "Logo image",
         "es": "Logotipo",
         "fr": "Image du logo",
         "it": "Immagine del logo",

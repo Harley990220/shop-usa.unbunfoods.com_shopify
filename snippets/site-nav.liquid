@@ -78,21 +78,6 @@
           <span class="site-nav__label">{{ link.title | escape }}</span>
         </a>
       </li>
-  	{% endif %}
+    {% endif %}
   {% endfor %}
-  
-    <!--    BEGINADD CART BUTTON -->
-    <li {% if link.active %} class="site-nav--active"{% endif %}>
-      <a href="/cart" class="site-nav__link site-nav__link--main site-header__icon site-header__cart site-header__cart_custom">
-        <span class="site-nav__label">CART</span>
-        <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
-        {% if cart.item_count > -1 %}
-        <div id="CartCount" class="site-nav__label site-header__cart-count-custom">
-          <span>({{ cart.item_count }})</span>
-          <span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
-        </div>
-        {% endif %}
-      </a>
-    </li>
-    <!--    END ADD CART BUTTON -->
 </ul>

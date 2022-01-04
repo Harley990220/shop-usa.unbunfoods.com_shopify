@@ -32,7 +32,7 @@
     "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UCmW8PcUxugQZmYSj-tU1wrw\/featured",
     "social_vimeo_link": "",
     "favicon": "shopify:\/\/shop_images\/admin-ajax.png",
-    "checkout_header_image": "shopify:\/\/shop_images\/newsletter_phot.jpg",
+    "checkout_header_image": "shopify:\/\/shop_images\/UNBUN-shopify-checkout-v4.jpg",
     "checkout_logo_image": "shopify:\/\/shop_images\/new_Unbun_logo_2Col-1-300x135.png",
     "checkout_logo_position": "left",
     "checkout_logo_size": "medium",
@@ -51,10 +51,9 @@
         "type": "header",
         "settings": {
           "align_logo": "left",
-          "blue_logo": "shopify:\/\/shop_images\/UNBUN_LOGO_BLUE_72ppi.png",
-          "white_logo": "shopify:\/\/shop_images\/UNBUN_LOGO_72ppi.png",
-          "logo_max_width": 250,
-          "main_linklist": "unbunfoods-main-menu",
+          "logo": "shopify:\/\/shop_images\/new_Unbun_logo_2Col-1-300x135.png",
+          "logo_max_width": 170,
+          "main_linklist": "main-menu",
           "message": false,
           "home_page_only": false,
           "message_text": "FREE SHIPPING FOR FIRST TIME CUSTOMERS MINIMUM $20 ORDER - DISCOUNT CODE: NEWUNBUN",
@@ -66,14 +65,14 @@
       "hero": {
         "type": "hero",
         "settings": {
-          "image": "shopify:\/\/shop_images\/Fun-brunch-opt_8c69efbd-e72a-4a28-b2c5-30c92a103752.jpg",
+          "image": "shopify:\/\/shop_images\/website-banner8.jpg",
           "alignment": "center",
           "hero_layout": "full_width",
-          "hero_size": "large",
+          "hero_size": "adapt",
           "text_size": "medium",
-          "title": "Deliciously Uncompromising Bakery Products",
-          "text": "<p>Gluten-free • Grain-free • Paleo • Keto<\/p>",
-          "button_label": "Buy Products",
+          "title": "",
+          "text": "",
+          "button_label": "",
           "button_link": "shopify:\/\/collections\/buy-unbun-products"
         }
       },
@@ -143,10 +142,10 @@
       "feature-row": {
         "type": "feature-row",
         "settings": {
-          "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_264400bc-f9ea-4142-a688-b2b8fd7e6eaf.png",
+          "image": "shopify:\/\/shop_images\/045A9126-shopify.jpg",
           "layout": "left",
-          "title": "only the g.o.a.t.",
-          "text": "<p>we think each of our ingredients is the greatest of all time...in our humble of opinion, of course. selected specifically for being, clean, natural and tasty.<\/p>",
+          "title": "Why we are Unmatched",
+          "text": "<p>Unbun products are like nothing else out there when it comes to balancing taste and well-being. Using only natural ingredients, we provide a full line of delicious options that give you the taste you crave without sacrificing on health.<\/p><p><\/p><p>You don’t have to compromise on taste anymore. <\/p><p><\/p><p>Grain-free, gluten-free, Keto, and Paleo foods have never been so delicious. <\/p><p><\/p>",
           "button_label": "SHOP NOW",
           "button_link": "shopify:\/\/collections\/buy-unbun-products"
         }
@@ -154,36 +153,27 @@
       "footer": {
         "type": "footer",
         "blocks": {
-          "b09208f8-8950-4c16-bf3f-cfff1aaaa623": {
-            "type": "text",
-            "settings": {
-              "title": "Talk to clients",
-              "text": "<p>sign up for fresh-baked updates from the radically honest world of unbun<\/p>"
-            }
-          },
-          "e021d078-987a-4665-9ba9-6f0dbab4b802": {
-            "type": "newsletter",
-            "settings": {
-              "title": "Newsletter"
-            }
-          },
-          "274e4ab3-7935-436a-8cfd-774f21bfa58d": {
+          "link_list": {
             "type": "link_list",
             "settings": {
-              "title": "Footer Menu",
+              "title": "Quick links",
               "menu": "footer"
+            }
+          },
+          "newsletter": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Get 10% off your first order when you join the Unbun community:"
             }
           }
         },
         "block_order": [
-          "b09208f8-8950-4c16-bf3f-cfff1aaaa623",
-          "e021d078-987a-4665-9ba9-6f0dbab4b802",
-          "274e4ab3-7935-436a-8cfd-774f21bfa58d"
+          "link_list",
+          "newsletter"
         ],
         "settings": {
-          "footer_logo": "shopify:\/\/shop_images\/UNBUN.png",
           "show_payment_icons": true,
-          "color_footer_bg": "#f7f3e8",
+          "color_footer_bg": "#f5f5f5",
           "color_footer_text": "#3d4246"
         }
       },
@@ -241,349 +231,15 @@
           "blog_show_date": true
         }
       },
-      "image-with-text": {
-        "type": "image-with-text",
-        "blocks": {
-          "a88db97d-cce9-4cc3-8c44-7da0ae7ed144": {
-            "type": "text",
-            "settings": {
-              "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
-            }
-          }
-        },
-        "block_order": [
-          "a88db97d-cce9-4cc3-8c44-7da0ae7ed144"
-        ],
+      "163456562020f7d372": {
+        "type": "collection",
         "settings": {
-          "image": "shopify:\/\/shop_images\/image_314.png",
-          "height": "adapt",
-          "color_scheme": "background-1",
-          "layout": "image_first"
-        }
-      },
-      "slider-text": {
-        "type": "slider-text",
-        "settings": {
-          "slider_image": "shopify:\/\/shop_images\/UNBUN.png",
-          "title": "",
-          "description": "",
-          "btn_text": "",
-          "btn_url": "",
-          "slider_row": 1,
-          "slider_column": 3
-        }
-      },
-      "our-story-content1": {
-        "type": "our-story-content1",
-        "settings": {
-          "image": "shopify:\/\/shop_images\/image_405_1.png",
-          "layout": "right",
-          "title": "lettuce ain't no bun*",
-          "text": "",
-          "button_label": "",
-          "button_link": ""
-        }
-      },
-      "our-story-content2": {
-        "type": "our-story-content2",
-        "settings": {
-          "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_4.png",
-          "layout": "left",
-          "title": "*a not-so-direct quote from our founder gus klemos",
-          "text": "<p>as he watched his favourite burger slip through the flimsy fold of a lettuce leaf, the seed of unbun was planted: couldn't this done better?<\/p>",
-          "button_label": "blog",
-          "button_link": "shopify:\/\/pages\/blog"
-        }
-      },
-      "our-story-content3": {
-        "type": "our-story-content3",
-        "settings": {
-          "image": "shopify:\/\/shop_images\/image_406_1.png",
-          "layout": "right",
-          "title": "you're in a villa...",
-          "text": "<p>(or at least that's how you feel.)<\/p><p>that sensation of looking out over glittering blue mediterranean water is the feeling we want our utterly clean baking to leave people with(hint, hint...gus is greek.)<\/p>",
-          "button_label": "shop now",
-          "button_link": "shopify:\/\/pages\/shop"
-        }
-      },
-      "our-story-content4": {
-        "type": "our-story-content4",
-        "settings": {
-          "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_5.png",
-          "layout": "left",
-          "title": "baked clean a.f",
-          "text": "<p>it's no secret that baking without grain or gluten is really hard. and too often, extra stuff sneaks in to make it easier. not at unbun. just the realest ingredients. endof story<\/p>",
-          "button_label": "ingredients",
-          "button_link": "shopify:\/\/pages\/ingredients"
-        }
-      },
-      "product-collection": {
-        "type": "product-collection",
-        "blocks": {
-          "445f6996-6617-405b-be6d-e2812c44d9e7": {
-            "type": "slide",
-            "settings": {
-              "title": "bread",
-              "collection": "buy-unbun-products",
-              "grid": 4,
-              "rows": 1,
-              "button_label": "ADD TO CART",
-              "button_link": "",
-              "jump_button_label": "",
-              "jump_button_link": "",
-              "show_vendor": false,
-              "show_view_all": false
-            }
-          },
-          "015ccd54-8026-4baa-b2e2-c20806e22a02": {
-            "type": "slide",
-            "settings": {
-              "title": "bagels",
-              "collection": "buy-unbun-products",
-              "grid": 4,
-              "rows": 1,
-              "button_label": "ADD TO CART",
-              "button_link": "",
-              "jump_button_label": "",
-              "jump_button_link": "",
-              "show_vendor": false,
-              "show_view_all": false
-            }
-          },
-          "c222cc2c-d035-408e-b945-ba037bfa0521": {
-            "type": "slide",
-            "settings": {
-              "title": "buns",
-              "collection": "buy-unbun-products",
-              "grid": 4,
-              "rows": 1,
-              "button_label": "ADD TO CART",
-              "button_link": "",
-              "jump_button_label": "",
-              "jump_button_link": "",
-              "show_vendor": false,
-              "show_view_all": false
-            }
-          },
-          "94608625-bde8-45d8-9f18-ac2d4809ddbd": {
-            "type": "slide",
-            "settings": {
-              "title": "pizzas",
-              "collection": "bundles",
-              "grid": 4,
-              "rows": 1,
-              "button_label": "ADD TO CART",
-              "button_link": "",
-              "jump_button_label": "",
-              "jump_button_link": "",
-              "show_vendor": false,
-              "show_view_all": false
-            }
-          },
-          "2fccd0fb-4d49-4185-8282-8545f375230f": {
-            "type": "slide",
-            "settings": {
-              "title": "crusts",
-              "collection": "buy-unbun-products",
-              "grid": 4,
-              "rows": 1,
-              "button_label": "ADD TO CART",
-              "button_link": "",
-              "jump_button_label": "",
-              "jump_button_link": "",
-              "show_vendor": false,
-              "show_view_all": false
-            }
-          },
-          "f6bffcb4-2cbf-44b0-96b1-009d14a9258a": {
-            "type": "slide",
-            "settings": {
-              "title": "category name",
-              "collection": "buy-unbun-products",
-              "grid": 4,
-              "rows": 1,
-              "button_label": "ADD TO CART",
-              "button_link": "",
-              "jump_button_label": "ADD TO CART",
-              "jump_button_link": "",
-              "show_vendor": false,
-              "show_view_all": false
-            }
-          }
-        },
-        "block_order": [
-          "445f6996-6617-405b-be6d-e2812c44d9e7",
-          "015ccd54-8026-4baa-b2e2-c20806e22a02",
-          "c222cc2c-d035-408e-b945-ba037bfa0521",
-          "94608625-bde8-45d8-9f18-ac2d4809ddbd",
-          "2fccd0fb-4d49-4185-8282-8545f375230f",
-          "f6bffcb4-2cbf-44b0-96b1-009d14a9258a"
-        ],
-        "settings": {}
-      },
-      "ingredients-content": {
-        "type": "ingredients-content",
-        "blocks": {
-          "fee1c090-4d9b-41e2-921f-c1b0e0e10651": {
-            "type": "Ingredient",
-            "settings": {
-              "ingredient": "Blanched almond flour",
-              "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_cbe23696-4d23-4f09-bc02-22156e7495e7.png",
-              "description": "<p>A fruit unlike any other, coconut flour is high in many minerals like manganese<\/p>"
-            }
-          },
-          "a53ede92-21ce-4ade-b5e5-ac32627ed0fa": {
-            "type": "Ingredient",
-            "settings": {
-              "ingredient": "Liquid whole egg",
-              "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_3_48451145-11d9-4d1b-ae02-41cb0027afa9.png",
-              "description": "<p>A fruit unlike any other, coconut flour is high in many minerals like manganese<\/p>"
-            }
-          },
-          "ab69d324-b127-4f51-b8bc-e7f54ed8b319": {
-            "type": "Ingredient",
-            "settings": {
-              "ingredient": "Tomato Sauce tomatoes",
-              "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_2_1770038b-d56e-4585-88ed-bdd0645ec7e3.png",
-              "description": "<p>A fruit unlike any other, coconut flour is high in many minerals like manganese<\/p>"
-            }
-          },
-          "d1e3824a-c29f-47a9-8e89-50180b0134af": {
-            "type": "Ingredient",
-            "settings": {
-              "ingredient": "omato Sauce tomatoes",
-              "image": "shopify:\/\/shop_images\/image_240.png",
-              "description": "<p>A fruit unlike any other, coconut flour is high in many minerals like manganese<\/p>"
-            }
-          },
-          "5673bfe8-9420-4d4d-ab13-09964f2d082f": {
-            "type": "Ingredient",
-            "settings": {
-              "ingredient": "extra virgin olive oil",
-              "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_cbe23696-4d23-4f09-bc02-22156e7495e7.png",
-              "description": "<p>A fruit unlike any other, coconut flour is high in many minerals like manganese<\/p>"
-            }
-          },
-          "095ec3d0-1ddc-46bd-9244-3b308a461878": {
-            "type": "Ingredient",
-            "settings": {
-              "ingredient": "Garlic powder, Dried basil",
-              "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_264400bc-f9ea-4142-a688-b2b8fd7e6eaf.png",
-              "description": "<p>A fruit unlike any other, coconut flour is high in many minerals like manganese<\/p>"
-            }
-          }
-        },
-        "block_order": [
-          "fee1c090-4d9b-41e2-921f-c1b0e0e10651",
-          "a53ede92-21ce-4ade-b5e5-ac32627ed0fa",
-          "ab69d324-b127-4f51-b8bc-e7f54ed8b319",
-          "d1e3824a-c29f-47a9-8e89-50180b0134af",
-          "5673bfe8-9420-4d4d-ab13-09964f2d082f",
-          "095ec3d0-1ddc-46bd-9244-3b308a461878"
-        ],
-        "settings": {}
-      },
-      "blog-feature": {
-        "type": "blog-feature",
-        "blocks": {
-          "b6e379e6-8048-43a2-8df8-fd8f9db3ead3": {
-            "type": "Freature",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_3_48451145-11d9-4d1b-ae02-41cb0027afa9.png",
-              "layout": "left",
-              "title": "ready steady bake",
-              "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laborre et dolore magna aliqua.<\/p>",
-              "comment": "september 24, 2021 by ryan robinson",
-              "button_label": "read more",
-              "button_link": "shopify:\/\/pages\/blog"
-            }
-          },
-          "d9c80dc3-bd5b-4ec2-8be3-16cb1504abcd": {
-            "type": "Freature",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/49add82624a8349faccccf5fa1f88cc0_4_3d26da1d-0617-46b1-8cb5-68b311386ec4.png",
-              "layout": "right",
-              "title": "burger stack secrets",
-              "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laborre et dolore magna aliqua.<\/p>",
-              "comment": "september 24, 2021 by ryan robinson",
-              "button_label": "read more",
-              "button_link": "shopify:\/\/pages\/blog"
-            }
-          }
-        },
-        "block_order": [
-          "b6e379e6-8048-43a2-8df8-fd8f9db3ead3",
-          "d9c80dc3-bd5b-4ec2-8be3-16cb1504abcd"
-        ],
-        "settings": {}
-      },
-      "feature-row1": {
-        "type": "feature-row1",
-        "settings": {
-          "image": "shopify:\/\/shop_images\/image_314.png",
-          "layout": "right",
-          "title": "aettuce ain't no bun*",
-          "text": "",
-          "button_label": "said gus",
-          "button_link": ""
-        }
-      },
-      "feature-row2": {
-        "type": "feature-row2",
-        "settings": {
-          "layout": "left",
-          "title": "Image with text",
-          "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-          "button_label": "",
-          "button_link": ""
-        }
-      },
-      "feature-row3": {
-        "type": "feature-row3",
-        "settings": {
-          "layout": "left",
-          "title": "Image with text",
-          "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-          "button_label": "",
-          "button_link": ""
-        }
-      },
-      "our-story-buttons": {
-        "type": "our-story-buttons",
-        "settings": {
-          "btn_text": "SAID GuS",
-          "btn_url": ""
-        }
-      },
-      "blog-article": {
-        "type": "blog-article",
-        "blocks": {
-          "3220e32e-cf0e-4f37-940e-f62e0e5bca32": {
-            "type": "article",
-            "settings": {
-              "blogPost": "latest\/article1"
-            }
-          },
-          "22c96662-7449-48d4-abaa-7c3f16310d92": {
-            "type": "article",
-            "settings": {
-              "blogPost": "latest\/article2"
-            }
-          },
-          "d5efd054-800e-41cf-8917-0c3a00cae83b": {
-            "type": "article",
-            "settings": {
-              "blogPost": "latest\/article3"
-            }
-          }
-        },
-        "block_order": [
-          "3220e32e-cf0e-4f37-940e-f62e0e5bca32",
-          "22c96662-7449-48d4-abaa-7c3f16310d92",
-          "d5efd054-800e-41cf-8917-0c3a00cae83b"
-        ],
-        "settings": {
-          "blogTitle": "the latest"
+          "title": "Bundle & Save",
+          "collection": "bundles",
+          "grid": 4,
+          "rows": 2,
+          "show_vendor": false,
+          "show_view_all": false
         }
       }
     },
@@ -591,7 +247,8 @@
       "hero",
       "featured-collections",
       "feature-row",
-      "slideshow"
+      "slideshow",
+      "163456562020f7d372"
     ]
   },
   "presets": {

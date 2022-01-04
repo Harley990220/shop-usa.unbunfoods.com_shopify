@@ -23,7 +23,7 @@ shop.enabled_currencies %} { "iso_code":"{{ currency.iso_code }}", "name":"{{
 "grams":{{ item.grams }}, "requires_shipping":"{{ item.requires_shipping }}",
 "product_title":"{{ item.product_title }}", "variant_title":"{{
   item.variant_title
-}}", "variant_options":"{{ item.variant_options }}", "title":"{{ item.title }}",
+}}", "variant_options":"{{ item.variant_options }}", "title | remove: '/ Default Title'| remove: 'Default Title' | remove: '/ Default' | remove: 'Default' | replace: '(Freegifts)', '' ":"{{ item.title }}",
 "tags":[ {% for tag in item.product.tags %} "{{ tag }}" {% if forloop.last !=
 true %} , {% endif %} {% endfor %} ], "collection_ids":[ {% for c in
 item.product.collections %}

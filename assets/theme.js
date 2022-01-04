@@ -417,7 +417,10 @@ slate.a11y = {
       }
       if (isTargetBlank) {
         if (rel === undefined || rel.indexOf('noopener') === -1) {
-          $link.attr('rel', 'noopener');
+          $link.attr('rel', function(i, val) {
+            var relValue = val === undefined ? '' : val + ' ';
+            return relValue + 'noopener';
+          });
         }
         $link.attr('aria-describedby', idSelectors.newWindow);
       }
@@ -726,7 +729,47 @@ slate.Variants = (function() {
         return;
       }
 
-      this._updateMasterSelect(variant);
+        var WCP_JSON=[];
+            if(document.getElementsByClassName('wcp_json').length){
+              WCP_JSON=JSON.parse(document.getElementsByClassName('wcp_json')[0].innerText);
+              for(var tempwcp=0; tempwcp < WCP_JSON.variants.length; tempwcp++){
+                if(variant.id==WCP_JSON.variants[tempwcp].id){
+                  variant.price=WCP_JSON.variants[tempwcp].price;
+                  variant.compare_at_price=WCP_JSON.variants[tempwcp].compare_at_price;
+                }
+              }
+            }
+			
+			
+            if (document.getElementsByClassName('wcp_vd_table').length != 0 && document.getElementById('vdtable') != null) {
+              var source = document.getElementById('vdtable').innerHTML;
+              var template = Handlebars.compile(source);
+              if (document.getElementsByClassName('wcp_vd_table')[0] != undefined && document.getElementsByClassName('wcp_vd_table')[0].innerText != '') {
+                var context = JSON.parse(document.getElementsByClassName('wcp_vd_table')[0].innerText);
+                var vdtable = [];
+                vdtable['vdtable'] = context['wpd_' + variant.id];
+                if(vdtable['vdtable']){
+                vdtable['vdtable'].forEach(function (arrayItem) {
+                  arrayItem.Price = arrayItem.Price.replace(/<\/?span[^>]*>/g, '');
+                });
+                }
+                var html = template(vdtable);
+				try{
+					document.getElementById('wcp_vd_table').innerHTML = html;
+				}catch(e){
+					console.log("VD div not found");
+				}
+              }
+              else {
+			  try{
+			    document.getElementById('wcp_vd_table').innerHTML = '';
+			  }catch(e){
+			  	console.log("VD div not found");
+			  }
+              }
+            }
+
+        this._updateMasterSelect(variant);
       this._updateImages(variant);
       this._updatePrice(variant);
       this._updateSKU(variant);
@@ -767,12 +810,47 @@ slate.Variants = (function() {
      * @return {event} variantPriceChange
      */
     _updatePrice: function(variant) {
-      if (
-        variant.price === this.currentVariant.price &&
-        variant.compare_at_price === this.currentVariant.compare_at_price
-      ) {
-        return;
-      }
+      //if (variant.price === this.currentVariant.price && variant.compare_at_price === this.currentVariant.compare_at_price ){ return;}
+
+      var WCP_JSON=[];
+            if(document.getElementsByClassName('wcp_json').length){
+              WCP_JSON=JSON.parse(document.getElementsByClassName('wcp_json')[0].innerText);
+              for(var tempwcp=0; tempwcp < WCP_JSON.variants.length; tempwcp++){
+                if(variant.id==WCP_JSON.variants[tempwcp].id){
+                  variant.price=WCP_JSON.variants[tempwcp].price;
+                  variant.compare_at_price=WCP_JSON.variants[tempwcp].compare_at_price;
+                }
+              }
+            }
+			
+			
+            if (document.getElementsByClassName('wcp_vd_table').length != 0 && document.getElementById('vdtable') != null) {
+              var source = document.getElementById('vdtable').innerHTML;
+              var template = Handlebars.compile(source);
+              if (document.getElementsByClassName('wcp_vd_table')[0] != undefined && document.getElementsByClassName('wcp_vd_table')[0].innerText != '') {
+                var context = JSON.parse(document.getElementsByClassName('wcp_vd_table')[0].innerText);
+                var vdtable = [];
+                vdtable['vdtable'] = context['wpd_' + variant.id];
+                if(vdtable['vdtable']){
+                vdtable['vdtable'].forEach(function (arrayItem) {
+                  arrayItem.Price = arrayItem.Price.replace(/<\/?span[^>]*>/g, '');
+                });
+                }
+                var html = template(vdtable);
+				try{
+					document.getElementById('wcp_vd_table').innerHTML = html;
+				}catch(e){
+					console.log("VD div not found");
+				}
+              }
+              else {
+			  try{
+			    document.getElementById('wcp_vd_table').innerHTML = '';
+			  }catch(e){
+			  	console.log("VD div not found");
+			  }
+              }
+            }
 
       this.$container.trigger({
         type: 'variantPriceChange',

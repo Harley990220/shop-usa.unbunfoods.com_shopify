@@ -7,7 +7,6 @@
             <h2>{{ section.settings.heading | escape }}</h2>
           </div>
         {%- endif -%}
-        <hr>
         <ul class="grid grid--uniform grid--view-items">
           {%- for product in recommendations.products -%}
 <script type='application/json' class='bold-product-json'>{{ product | json }}</script>
